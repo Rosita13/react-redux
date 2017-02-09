@@ -8,7 +8,8 @@ const CooperationCard = ({ cooperation }) => (
       <div className="media-body">
         <h4 className="media-heading">
           <strong>
-            <Link to={`cooperation/${cooperation.slug}`}>{cooperation.name}</Link>
+            <Link to={`/cooperation/${cooperation.slug}`}>{cooperation.name}</Link>
+            <Link to={`/cooperation/${cooperation.slug}/edit`}> edit</Link>
           </strong>
         </h4>
         {cooperation.name} <br />
@@ -17,7 +18,7 @@ const CooperationCard = ({ cooperation }) => (
         {cooperation.type} <br />
         {cooperation.total} <br />
         <br />
-        <Link to={'/cooperations'}>{cooperation.name}</Link>
+        <Link to={'/cooperations'}>Back</Link>
       </div>
     </div>
   </div>

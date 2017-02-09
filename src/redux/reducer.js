@@ -9,6 +9,7 @@ import counter from './modules/counter';
 import info from './modules/info';
 import cooperations from './modules/cooperations';
 import cooperation from './modules/cooperation';
+import cooperationsave from './modules/cooperationsave';
 // import widgets from './modules/widgets';
 // import survey from './modules/survey';
 // import chat from './modules/chat';
@@ -29,6 +30,7 @@ export default function createReducers(asyncReducers) {
     info,
     cooperation,
     cooperations,
+    cooperationsave,
     // widgets,
     // survey,
     // chat,

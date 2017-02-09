@@ -45,7 +45,7 @@ export default store => {
         You can also protect a route like this:
         <Route path="protected-route" {...permissionsComponent(isAuthenticated)(Component)}>
       */}
-      <Route {...permissionsComponent(isAuthenticated)()}>
+      <Route {...permissionsComponent(isAuthenticated)() }>
         <Route path="loginSuccess" getComponent={() => System.import('./containers/LoginSuccess/LoginSuccess')} />
         <Route
           path="chatFeathers"
@@ -59,7 +59,7 @@ export default store => {
       </Route>
 
       {/* Routes disallow login */}
-      <Route {...permissionsComponent(isNotAuthenticated)()}>
+      <Route {...permissionsComponent(isNotAuthenticated)() }>
         <Route path="register" getComponent={() => System.import('./containers/Register/Register')} />
       </Route>
 
@@ -69,6 +69,9 @@ export default store => {
       <Route path="profile" getComponent={() => System.import('./containers/profile/profile')} />
       <Route path="cooperations" getComponent={() => System.import('./containers/Cooperations/Cooperations')} />
       <Route path="cooperation/:slug" getComponent={() => System.import('./containers/Cooperation/Cooperation')} />
+      <Route
+        path="cooperation/:slug/edit"
+        getComponent={() => System.import('./containers/CooperationEdit/CooperationEdit')} />
       <Route
         path="cooperation-create"
         getComponent={() => System.import('./containers/CooperationCreate/CooperationCreate')} />

@@ -5,15 +5,21 @@ import {
   Form, FormGroup, Col, ControlLabel, FormControl, Button,
   HelpBlock
 } from 'react-bootstrap';
-import * as cooperationActions from 'redux/modules/cooperationsave';
+import * as cooperationShowActions from 'redux/modules/cooperation';
+import * as cooperationActions from 'redux/modules/cooperationupdate';
 import * as notifActions from 'redux/modules/notifs';
 
 @connect(
-  () => ({}),
-  { ...cooperationActions, ...notifActions })
-export default class CooperationCreateForm extends Component {
+  state => ({
+    cooperation: state.cooperation.detail,
+    loadDetail: PropTypes.func.isRequired,
+  }),
+  { ...cooperationActions, ...notifActions, ...cooperationShowActions })
+export default class CooperationEditForm extends Component {
   static propTypes = {
-    save: PropTypes.func.isRequired,
+    update: PropTypes.func.isRequired,
+    loadDetail: PropTypes.func.isRequired,
+    params: PropTypes.string.isRequired
   }
 
   constructor(props) {
@@ -40,7 +46,11 @@ export default class CooperationCreateForm extends Component {
     this.handleQuality = this._handleQuality.bind(this);
     this.handleType = this._handleType.bind(this);
     this.handleTotal = this._handleTotal.bind(this);
-    this.handleSubmit = this._handleSubmit.bind(this);
+    this.handleEdit = this._handleEdit.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.loadDetail(this.props.params.slug);
   }
 
   _handleName(e) {
@@ -72,7 +82,7 @@ export default class CooperationCreateForm extends Component {
   _handleType(e) {
     console.log(e.target.value);
     if (e.target.value.length <= 3) {
-      this.setState({ validType: 'error', msgType: 'Type must greather than 1000 character' });
+      this.setState({ validType: 'error', msgType: 'Type must greather than 4 character' });
     } else {
       this.setState({ validType: '', type: e.target.value, msgType: '' });
     }
@@ -81,13 +91,13 @@ export default class CooperationCreateForm extends Component {
   _handleTotal(e) {
     console.log(e.target.value);
     if (e.target.value.length <= 6) {
-      this.setState({ validTotal: 'error', msgTotal: 'Type must greather than 1000 character' });
+      this.setState({ validTotal: 'error', msgTotal: 'Type must greather than 10 character' });
     } else {
       this.setState({ validTotal: '', total: e.target.value, msgTotal: '' });
     }
   }
 
-  _handleSubmit(e) {
+  _handleEdit(e) {
     e.preventDefault();
     const {
       name,
@@ -105,12 +115,12 @@ export default class CooperationCreateForm extends Component {
       total: total,
     };
 
-    this.props.save(data).then(this.successSave);
+    this.props.Edit(data).then(this.successEdit);
   }
 
-  successSave = result => {
+  successEdit = result => {
     this.props.notifSend({
-      message: 'Data has been saved!',
+      message: 'Data has been Edit!',
       kind: 'success',
       dismissAfter: 2000
     });
@@ -130,6 +140,7 @@ export default class CooperationCreateForm extends Component {
       validName, validPrice, validQuality, validType, validTotal,
       msgName, msgPrice, msgQuality, msgType, msgTotal
     } = this.state;
+    console.log(this.props.detail);
     return (
       <div>
         <Form horizontal style={{ marginTop: '40px' }} ref="form">
@@ -195,8 +206,8 @@ export default class CooperationCreateForm extends Component {
 
           <FormGroup>
             <Col smOffset={2} sm={10}>
-              <Button type="button" onClick={this.handleSubmit}>
-                Submit
+              <Button type="button" onClick={this.handleEdit}>
+                Edit
               </Button>
             </Col>
           </FormGroup>

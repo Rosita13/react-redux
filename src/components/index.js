@@ -16,6 +16,7 @@ export Notifs from './Notifs/Notifs';
 export CooperationList from './CooperationList/CooperationList';
 export CooperationCard from './CooperationCard/CooperationCard';
 export CooperationCreateForm from './CooperationCreateForm/CooperationCreateForm';
+export CooperationEditForm from './CooperationEditForm/CooperationEditForm';
 // export RegisterForm from './RegisterForm/RegisterForm';
 // export SurveyForm from './SurveyForm/SurveyForm';
 // export WidgetForm from './WidgetForm/WidgetForm';
