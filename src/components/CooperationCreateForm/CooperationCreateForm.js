@@ -30,6 +30,7 @@ export default class CooperationCreateForm extends Component {
     this.handleQuality = this._handleQuality.bind(this);
     this.handleType = this._handleType.bind(this);
     this.handleTotal = this._handleTotal.bind(this);
+    this.handleSubmit = this._handleSubmit.bind(this);
   }
 
   _handleName(e) {
@@ -75,6 +76,26 @@ export default class CooperationCreateForm extends Component {
     } else {
       this.setState({ validTotal: '', total: e.target.value, msgTotal: '' });
     }
+  }
+
+  _handleSubmit(e) {
+    e.preventDefault();
+    const {
+      name,
+      price,
+      quality,
+      type,
+      total,
+    } = this.state;
+
+    let data = {
+      name: name,
+      price: price,
+      quality: quality,
+      type: type,
+      total: total,
+    };
+    console.log(data)
   }
 
   render() {
@@ -147,8 +168,8 @@ export default class CooperationCreateForm extends Component {
 
           <FormGroup>
             <Col smOffset={2} sm={10}>
-              <Button type="submit">
-                Sign in
+              <Button type="button" onClick={this.handleSubmit}>
+                Submit
               </Button>
             </Col>
           </FormGroup>
