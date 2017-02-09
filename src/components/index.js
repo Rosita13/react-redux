@@ -1,4 +1,4 @@
-/* eslint linebreak-style: ["error", "windows"]*/
+/* eslint-disable */
 /**
  *  Point of contact for component modules
  *

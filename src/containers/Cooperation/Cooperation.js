@@ -1,4 +1,4 @@
-/* eslint linebreak-style: ["error", "windows"]*/
+/* eslint-disable */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as cooperationActions from 'redux/modules/cooperation';
