@@ -1,4 +1,4 @@
-
+/* eslint linebreak-style: ["error", "windows"]*/
 const LOAD = 'redux-example/cooperation/LOAD';
 const LOAD_SUCCESS = 'redux-example/cooperation/LOAD_SUCCESS';
 const LOAD_FAIL = 'redux-example/cooperation/LOAD_FAIL';

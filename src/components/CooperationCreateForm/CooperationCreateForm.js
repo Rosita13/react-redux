@@ -1,3 +1,4 @@
+/* eslint linebreak-style: ["error", "windows"]*/
 import React, { Component } from 'react';
 import {
   Form, FormGroup, Col, ControlLabel, FormControl, Checkbox, Button,
