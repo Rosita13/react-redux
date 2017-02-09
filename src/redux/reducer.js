@@ -1,3 +1,4 @@
+/* eslint linebreak-style: ["error", "windows"]*/
 import multireducer from 'multireducer';
 import { routerReducer } from 'react-router-redux';
 import { reducer as reduxAsyncConnect } from 'redux-connect';

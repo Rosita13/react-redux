@@ -52,7 +52,7 @@ export default class CooperationCreateForm extends Component {
   _handleQuality(e) {
     console.log(e.target.value);
     if (e.target.value.length <= 5) {
-      this.setState({ validQuality: 'error', msgQuaity: 'Quality must greather than 1000 character' });
+      this.setState({ validQuality: 'error', msgQuality: 'Quality must greather than 1000 character' });
     } else {
       this.setState({ validQuality: '', quality: e.target.value, msgQuality: '' });
     }

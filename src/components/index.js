@@ -1,3 +1,4 @@
+/* eslint linebreak-style: ["error", "windows"]*/
 /**
  *  Point of contact for component modules
  *

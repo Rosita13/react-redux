@@ -1,3 +1,4 @@
+/* eslint linebreak-style: ["error", "windows"]*/
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import { routerActions } from 'react-router-redux';
@@ -53,6 +54,8 @@ export default store => {
             System.import('./containers/ChatFeathers/ChatFeathers')
           )}
           />
+        />
+
       </Route>
 
       {/* Routes disallow login */}
@@ -69,6 +72,7 @@ export default store => {
       <Route
         path="cooperation-create"
         getComponent={() => System.import('./containers/CooperationCreate/CooperationCreate')} />
+      <Route path="cooperation" getComponent={() => System.import('./containers/Cooperation/Cooperation')} />
       <Route
         path="survey"
         getComponent={() => injectReducerAndRender(
@@ -76,6 +80,7 @@ export default store => {
           System.import('./containers/Survey/Survey')
         )}
         />
+      />
       <Route
         path="widgets"
         getComponent={() => injectReducerAndRender(
@@ -83,6 +88,7 @@ export default store => {
           System.import('./containers/Widgets/Widgets')
         )}
         />
+      />
       <Route path="chat" getComponent={() => System.import('./containers/Chat/Chat')} />
 
       {/* Catch all route */}
