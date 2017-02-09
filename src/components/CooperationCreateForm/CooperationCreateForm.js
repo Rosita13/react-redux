@@ -1,7 +1,7 @@
 /* eslint linebreak-style: ["error", "windows"]*/
 import React, { Component } from 'react';
 import {
-  Form, FormGroup, Col, ControlLabel, FormControl, Checkbox, Button,
+  Form, FormGroup, Col, ControlLabel, FormControl, Button,
   HelpBlock
 } from 'react-bootstrap';
 
@@ -142,12 +142,6 @@ export default class CooperationCreateForm extends Component {
               {validTotal === 'error' &&
                 <HelpBlock>{msgTotal}</HelpBlock>
               }
-            </Col>
-          </FormGroup>
-
-          <FormGroup>
-            <Col smOffset={2} sm={10}>
-              <Checkbox>Remember me</Checkbox>
             </Col>
           </FormGroup>
 
