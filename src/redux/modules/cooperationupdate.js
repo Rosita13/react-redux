@@ -39,9 +39,11 @@ export function isLoaded(globalState) {
   return globalState.cooperationUpdate && globalState.cooperationUpdate.loaded;
 }
 
-export function update (data) {
+export function update(data) {
   return {
     types: [UPDATE, UPDATE_SUCCESS, UPDATE_FAIL],
-    promise: client => client.update('/cooperations', { data: data })
+    promise: client => client.patch(`/cooperations/${data._id}`, {
+      data: data
+    })
   };
 }

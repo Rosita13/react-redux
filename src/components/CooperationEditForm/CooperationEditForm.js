@@ -5,31 +5,28 @@ import {
   Form, FormGroup, Col, ControlLabel, FormControl, Button,
   HelpBlock
 } from 'react-bootstrap';
-import * as cooperationShowActions from 'redux/modules/cooperation';
 import * as cooperationActions from 'redux/modules/cooperationupdate';
 import * as notifActions from 'redux/modules/notifs';
+import { Link } from 'react-router';
 
 @connect(
-  state => ({
-    cooperation: state.cooperation.detail,
-    loadDetail: PropTypes.func.isRequired,
-  }),
-  { ...cooperationActions, ...notifActions, ...cooperationShowActions })
+  () => ({}),
+  { ...cooperationActions, ...notifActions })
 export default class CooperationEditForm extends Component {
   static propTypes = {
     update: PropTypes.func.isRequired,
-    loadDetail: PropTypes.func.isRequired,
-    params: PropTypes.string.isRequired
+    cooperation: PropTypes.object.isRequired,
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      price: '',
-      quality: '',
-      type: '',
-      total: '',
+      name: props.cooperation.name,
+      price: props.cooperation.price,
+      quality: props.cooperation.quality,
+      type: props.cooperation.type,
+      total: props.cooperation.total,
+      _id: props.cooperation._id,
       validName: '',
       validPrice: '',
       validQuality: '',
@@ -47,10 +44,6 @@ export default class CooperationEditForm extends Component {
     this.handleType = this._handleType.bind(this);
     this.handleTotal = this._handleTotal.bind(this);
     this.handleEdit = this._handleEdit.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.loadDetail(this.props.params.slug);
   }
 
   _handleName(e) {
@@ -105,6 +98,7 @@ export default class CooperationEditForm extends Component {
       quality,
       type,
       total,
+      _id,
     } = this.state;
 
     const data = {
@@ -113,9 +107,10 @@ export default class CooperationEditForm extends Component {
       quality: quality,
       type: type,
       total: total,
+      _id: _id,
     };
 
-    this.props.Edit(data).then(this.successEdit);
+    this.props.update(data).then(this.successEdit);
   }
 
   successEdit = result => {
@@ -140,7 +135,7 @@ export default class CooperationEditForm extends Component {
       validName, validPrice, validQuality, validType, validTotal,
       msgName, msgPrice, msgQuality, msgType, msgTotal
     } = this.state;
-    console.log(this.props.detail);
+    const { cooperation } = this.props;
     return (
       <div>
         <Form horizontal style={{ marginTop: '40px' }} ref="form">
@@ -149,7 +144,7 @@ export default class CooperationEditForm extends Component {
               Name
             </Col>
             <Col sm={10}>
-              <FormControl type="text" placeholder="Name" onChange={this.handleName} />
+              <FormControl type="text" defaultValue={this.props.cooperation.name} placeholder="Name" onChange={this.handleName} />
               {validName === 'error' &&
                 <HelpBlock>{msgName}</HelpBlock>
               }
@@ -161,7 +156,7 @@ export default class CooperationEditForm extends Component {
               Price
             </Col>
             <Col sm={10} className={validPrice}>
-              <FormControl type="text" placeholder="Price" onChange={this.handlePrice} />
+              <FormControl type="text" defaultValue={this.props.cooperation.price} placeholder="Price" onChange={this.handlePrice} />
               {validPrice === 'error' &&
                 <HelpBlock>{msgPrice}</HelpBlock>
               }
@@ -173,7 +168,7 @@ export default class CooperationEditForm extends Component {
               Quality
             </Col>
             <Col sm={10} className={validQuality}>
-              <FormControl type="text" placeholder="Quality" onChange={this.handleQuality} />
+              <FormControl type="text" defaultValue={this.props.cooperation.quality} placeholder="Quality" onChange={this.handleQuality} />
               {validQuality === 'error' &&
                 <HelpBlock>{msgQuality}</HelpBlock>
               }
@@ -185,7 +180,7 @@ export default class CooperationEditForm extends Component {
               Type
             </Col>
             <Col sm={10} className={validType}>
-              <FormControl type="text" placeholder="Type" onChange={this.handleType} />
+              <FormControl type="text" defaultValue={this.props.cooperation.type} placeholder="Type" onChange={this.handleType} />
               {validType === 'error' &&
                 <HelpBlock>{msgType}</HelpBlock>
               }
@@ -197,7 +192,7 @@ export default class CooperationEditForm extends Component {
               Total
             </Col>
             <Col sm={10} className={validTotal}>
-              <FormControl type="text" placeholder="Total" onChange={this.handleTotal} />
+              <FormControl type="text" defaultValue={this.props.cooperation.total} placeholder="Total" onChange={this.handleTotal} />
               {validTotal === 'error' &&
                 <HelpBlock>{msgTotal}</HelpBlock>
               }
@@ -207,8 +202,9 @@ export default class CooperationEditForm extends Component {
           <FormGroup>
             <Col smOffset={2} sm={10}>
               <Button type="button" onClick={this.handleEdit}>
-                Edit
+                Update
               </Button>
+              <Link to={`/cooperation/${this.props.cooperation.slug}/`}> Back</Link>
             </Col>
           </FormGroup>
         </Form>
